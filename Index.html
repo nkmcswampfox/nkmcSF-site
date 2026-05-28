@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NKMC Swamp Fox Chapter</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rye&family=Roboto+Slab:wght@400;700;900&display=swap');
+
+    :root {
+      --green: #00a651;
+      --yellow: #ffd400;
+      --black: #000000;
+      --panel: rgba(10, 10, 10, 0.96);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #000;
+      color: var(--green);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top, rgba(0,166,81,.13), transparent 35%),
+        radial-gradient(circle at bottom, rgba(255,212,0,.08), transparent 35%);
+      z-index: -1;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.96);
+      border-bottom: 3px solid var(--yellow);
+      box-shadow: 0 8px 24px rgba(0,0,0,.8);
+    }
+
+    .nav-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      font-family: 'Rye', Georgia, serif;
+      color: var(--green);
+      -webkit-text-stroke: 1px var(--yellow);
+      text-shadow: 0 2px 2px #000;
+      font-size: clamp(1.05rem, 2.5vw, 1.75rem);
+      text-transform: uppercase;
+      text-decoration: none;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav button {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--green);
+      -webkit-text-stroke: .45px var(--yellow);
+      text-shadow: 0 1px 1px #000;
+      font-family: 'Roboto Slab', Georgia, serif;
+      font-size: .82rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      padding: 8px 9px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    nav button:hover,
+    nav button.active {
+      border-color: var(--yellow);
+      background: rgba(255, 212, 0, .14);
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 42px 18px 70px;
+    }
+
+    .page {
+      display: none;
+      min-height: calc(100vh - 140px);
+      animation: fadeIn .25s ease-in-out;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+
+    h1, h2 {
+      font-family: 'Rye', Georgia, serif;
+      color: var(--green);
+      -webkit-text-stroke: 1px var(--yellow);
+      text-shadow: 0 3px 3px #000;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      line-height: 1.12;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 7vw, 5rem);
+      max-width: 1000px;
+      line-height: 1.05;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .page-title {
+      text-align: center;
+      font-size: clamp(2rem, 6vw, 3.7rem);
+      margin-bottom: 28px;
+    }
+
+    .chapter-logo {
+      width: min(520px, 92vw);
+      height: auto;
+      display: block;
+      border-radius: 18px;
+      box-shadow: 0 0 35px rgba(255,212,0,.22);
+      object-fit: contain;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 2px solid var(--yellow);
+      border-radius: 16px;
+      padding: clamp(22px, 4vw, 46px);
+      box-shadow: 0 0 35px rgba(0,0,0,.9);
+    }
+
+    .section-heading {
+      font-size: clamp(1.25rem, 3vw, 1.65rem);
+      margin: 30px 0 12px;
+      padding-left: 14px;
+      border-left: 6px solid var(--yellow);
+    }
+
+    p, li, label {
+      color: var(--green);
+      font-weight: 800;
+      font-size: clamp(1.05rem, 2.3vw, 1.12rem);
+      text-shadow: 0 1px 1px #000;
+      margin-bottom: 15px;
+    }
+
+    ol {
+      margin: 10px 0 18px 28px;
+    }
+
+    .notice {
+      margin-top: 28px;
+      padding: 16px;
+      background: #050505;
+      border-left: 6px solid var(--yellow);
+      border-radius: 8px;
+      font-weight: 900;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .big-message {
+      font-family: 'Rye', Georgia, serif;
+      color: var(--green);
+      -webkit-text-stroke: 1px var(--yellow);
+      text-shadow: 0 3px 3px #000;
+      font-size: clamp(2rem, 7vw, 4.2rem);
+      margin-top: 32px;
+      text-transform: uppercase;
+    }
+
+    .email-link {
+      display: inline-block;
+      color: var(--green);
+      -webkit-text-stroke: .35px var(--yellow);
+      text-shadow: 0 1px 1px #000;
+      font-size: clamp(1.1rem, 4vw, 1.55rem);
+      font-weight: 900;
+      margin-top: 12px;
+      text-decoration: none;
+      border-bottom: 2px solid var(--yellow);
+      word-break: break-word;
+    }
+
+    input {
+      width: 100%;
+      max-width: 620px;
+      padding: 14px;
+      margin: 8px auto 18px;
+      display: block;
+      border: 2px solid var(--yellow);
+      border-radius: 8px;
+      background: #050505;
+      color: var(--green);
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .btn {
+      border: 2px solid var(--yellow);
+      background: linear-gradient(180deg, #008f45, #005f2d);
+      color: var(--yellow);
+      padding: 13px 24px;
+      border-radius: 8px;
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #002b15;
+    }
+
+    .btn:hover {
+      filter: brightness(1.12);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .error {
+      color: #ff4d4d;
+      font-weight: 900;
+      margin-top: 12px;
+    }
+
+    .store-card {
+      margin-top: 24px;
+      padding: 22px;
+      border: 2px dashed var(--yellow);
+      border-radius: 12px;
+      background: #050505;
+    }
+
+    footer {
+      background: #000;
+      border-top: 2px solid var(--yellow);
+      text-align: center;
+      padding: 22px 15px;
+    }
+
+    footer p {
+      font-size: .9rem;
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 760px) {
+      .nav-wrap {
+        flex-direction: column;
+      }
+
+      nav {
+        justify-content: center;
+      }
+
+      nav button {
+        font-size: .72rem;
+        padding: 7px 6px;
+      }
+
+      main {
+        padding-top: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="nav-wrap">
+      
+
+      <nav>
+        <button class="nav-btn active" onclick="showPage('home')">Home</button>
+        <button class="nav-btn" onclick="showPage('history')">History</button>
+        <button class="nav-btn" onclick="showPage('events')">Events</button>
+        <button class="nav-btn" onclick="showPage('photos')">Photos</button>
+        <button class="nav-btn" onclick="showPage('contact')">Contact Us</button>
+        <button class="nav-btn" onclick="window.location.href='members.html?v=2'">Members Only</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="page active hero">
+      <h1>NKMC Swamp Fox Chapter</h1>
+      <img class="chapter-logo" src="swampfox.jpg" alt="NKMC Swamp Fox Chapter Logo">
+    </section>
+
+    <section id="history" class="page">
+      <div class="panel">
+        <h1 class="page-title">The History of the Nam Knights of America MC</h1>
+
+        <p>The Nam Knights of America Motorcycle Club (MC) was founded in July 1989 in Carlstadt, New Jersey, by a small group of Harley-Davidson riding combat veterans. Led by Jack Quigley, a Vietnam War platoon sergeant and retired Undersheriff, they established the club to recapture wartime brotherhood and support veterans in need.</p>
+
+        <h2 class="section-heading">The Origin</h2>
+        <p>A Unique Brotherhood. The founding members shared a distinct dual identity as Vietnam War combat veterans and law enforcement officers. When seeking a motorcycle club that honored their military service, traditional veteran clubs rejected them due to their law enforcement backgrounds. Guided by the suggestion of an established MC, they created their own club. The name reflects this unique synthesis:</p>
+        <p>“Nam” honors their service in the Vietnam War.</p>
+        <p>“Knights” symbolizes their dedication to law enforcement and a code of protection.</p>
+
+        <h2 class="section-heading">Evolution and Membership Expansion</h2>
+        <p>Though birthed by Vietnam combat veterans, the club adapted as the years progressed. To secure the club's longevity, membership parameters expanded. Today, the organization welcomes:</p>
+
+        <ol>
+          <li>Veterans from all military eras.</li>
+          <li>Active-duty military personnel.</li>
+          <li>Law enforcement officers, active and retired.</li>
+          <li>Patriots, who are dedicated community members sharing the club's values.</li>
+        </ol>
+
+        <h2 class="section-heading">Growth into an International Organization</h2>
+        <p>What began as a single New Jersey parent chapter has grown into an international movement. The club now spans over 80 chapters across multiple U.S. states, and Canada. Operating as a 501(c)(3) non-profit organization, chapters raise and donate millions of dollars to veteran causes, police charities, and families of fallen heroes.</p>
+
+        <h2 class="section-heading">The Legacy of the Patch</h2>
+        <p>The club's colors and patch directly reflect its historical roots. The original founding patch features a large, fierce dragon holding the Vietnam Service Ribbon. As membership grew to include non-Vietnam veterans, the club introduced a new version of the patch featuring the dragon holding the American flag. A manufacturing error caused this first run of American flag patches to be produced significantly smaller than the original. Club members jokingly dubbed this downsized version the “Gecko.” While the sizing error was quickly corrected to match the original dragon, the “Gecko” nickname remains a legendary piece of club history Nam Knights of America MC.</p>
+
+        <h2 class="section-heading">Local Spotlight</h2>
+        <p>The Swamp Fox Chapter (Charleston, SC), bringing this international mission to the South Carolina Lowcountry, the Swamp Fox Chapter was officially founded on February 20th, 2015. Headquartered in the Greater Charleston area, the chapter was established to extend the club’s footprint of support to the region's massive population of military personnel, veterans, and law enforcement officers.</p>
+
+        <h2 class="section-heading">The Namesake</h2>
+        <p>The chapter proudly draws its name and heritage from Revolutionary War Hero General Francis Marion, nicknamed the “Swamp Fox” by the British. Operating throughout the coastal swamps of South Carolina, Marion utilized cunning guerilla tactics to protect his homeland, a regional legacy of fierce protection that the chapter honors to this day.</p>
+
+        <h2 class="section-heading">A Decade of Impact</h2>
+        <p>Celebrating its milestone 10-year anniversary in February 2025, the chapter has become a staple of the Charleston community. Through major annual events, benefit rides, and their famous Lowcountry boils, the Swamp Fox Chapter raises crucial funds to support veteran aid groups, local law enforcement initiatives, and families of the fallen.</p>
+
+        <div class="notice">
+          DISCLAIMER: The Nam Knights of America MC does not claim any territory as evidenced by their “America” bottom rocker worn by members across the U.S.
+        </div>
+      </div>
+    </section>
+
+    <section id="events" class="page">
+      <div class="panel center">
+        <h1 class="page-title">Events</h1>
+        <div class="big-message">Stay Tuned for Future Events</div>
+      </div>
+    </section>
+
+    <section id="photos" class="page">
+      <div class="panel center">
+        <h1 class="page-title">Photos</h1>
+        <p>Photos will be added soon.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="page">
+      <div class="panel center">
+        <h1 class="page-title">Contact Us</h1>
+        <p>If you have any questions or are interested in getting to know us and the organization as a whole, please don’t hesitate to reach out via email:</p>
+        <a class="email-link" href="mailto:NKMCSWAMPFOX@gmail.com">NKMCSWAMPFOX@gmail.com</a>
+      </div>
+    </section>
+
+    <section id="members" class="page">
+      <div class="panel center">
+        <h1 class="page-title">Members Only</h1>
+
+        <div id="loginBox">
+          <p>Enter the members-only password to access the store.</p>
+          <label for="memberPassword">Password</label>
+          <input type="password" id="memberPassword" autocomplete="off">
+          <button class="btn" onclick="checkPassword()">Enter Store</button>
+          <p id="errorMessage" class="error"></p>
+        </div>
+
+        <div id="storeArea" class="hidden">
+          <h2 class="section-heading">Members Store</h2>
+          <p>This is where the members-only order form goes.</p>
+
+          <div class="store-card">
+            <p><strong>Next step:</strong> Create a Google Form for merch orders, turn on email notifications, then paste the embed code here. Members will only see the store area after entering the correct password.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>® 2026 Nam Knights of America MC — Swamp Fox Chapter. All rights reserved.</p>
+    <p>www.nkmcswampfox.com</p>
+  </footer>
+
+  <script>
+    function showPage(pageId) {
+      const pages = document.querySelectorAll('.page');
+      const buttons = document.querySelectorAll('.nav-btn');
+
+      pages.forEach(page => page.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+
+      buttons.forEach(button => button.classList.remove('active'));
+
+      const labels = {
+        home: 'Home',
+        history: 'History',
+        events: 'Events',
+        photos: 'Photos',
+        contact: 'Contact Us',
+        members: 'Members Only'
+      };
+
+      buttons.forEach(button => {
+        if (button.textContent.trim() === labels[pageId]) {
+          button.classList.add('active');
+        }
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function checkPassword() {
+      const correctPassword = "9/11Mayweneverforget!";
+      const enteredPassword = document.getElementById("memberPassword").value;
+      const loginBox = document.getElementById("loginBox");
+      const storeArea = document.getElementById("storeArea");
+      const errorMessage = document.getElementById("errorMessage");
+
+      if (enteredPassword === correctPassword) {
+        loginBox.classList.add("hidden");
+        storeArea.classList.remove("hidden");
+        errorMessage.textContent = "";
+      } else {
+        errorMessage.textContent = "Incorrect password. Please try again.";
+      }
+    }
+  </script>
+</body>
+</html>
