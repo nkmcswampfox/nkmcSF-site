@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | NKMC Swamp Fox</title>
+  <style>
+
+:root {
+  --bg: #0b0b0b;
+  --panel: #151515;
+  --panel-2: #202020;
+  --text: #f5f1e8;
+  --muted: #c9bfa8;
+  --gold: #c9a24a;
+  --gold-2: #f0d27a;
+  --red: #8b1e1e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  background:
+    radial-gradient(circle at top, rgba(201, 162, 74, 0.14), transparent 35%),
+    linear-gradient(180deg, #111 0%, #050505 100%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+}
+
+.site-header {
+  border-bottom: 2px solid var(--gold);
+  background: rgba(0, 0, 0, 0.92);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  color: var(--gold-2);
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--text);
+  text-decoration: none;
+  padding: 9px 12px;
+  border: 1px solid rgba(201, 162, 74, 0.35);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.95rem;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background: var(--gold);
+  color: #111;
+}
+
+.hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 56px 18px 24px;
+  text-align: center;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  color: var(--gold-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 3px 0 #000;
+}
+
+.hero p {
+  max-width: 760px;
+  margin: 18px auto 0;
+  color: var(--muted);
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 18px 70px;
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(32, 32, 32, 0.96), rgba(12, 12, 12, 0.96));
+  border: 1px solid rgba(201, 162, 74, 0.45);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+}
+
+.card h2 {
+  color: var(--gold-2);
+  font-size: 2rem;
+  margin-top: 0;
+}
+
+.card p {
+  color: var(--text);
+  font-size: 1.15rem;
+  line-height: 1.65;
+}
+
+.email-link {
+  color: var(--gold-2);
+  font-weight: bold;
+  word-break: break-word;
+}
+
+.placeholder {
+  border: 1px dashed rgba(201, 162, 74, 0.65);
+  border-radius: 14px;
+  padding: 28px;
+  text-align: center;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.footer {
+  border-top: 1px solid rgba(201, 162, 74, 0.35);
+  background: #050505;
+  color: var(--muted);
+  text-align: center;
+  padding: 24px 18px;
+  line-height: 1.6;
+}
+
+@media (max-width: 650px) {
+  .nav {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .nav-links {
+    justify-content: center;
+  }
+
+  .nav-links a {
+    font-size: 0.88rem;
+    padding: 8px 9px;
+  }
+
+  .card {
+    padding: 22px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="brand" href="index.html">NKMC Swamp Fox</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="history.html">History</a>
+        <a href="events.html">Events</a>
+        <a href="photos.html">Photos</a>
+        <a href="contact.html" class="active">Contact Us</a>
+        <a href="members.html">Members Only</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Contact Us</h1>
+    <p>Reach out to learn more about the Swamp Fox Chapter or the Nam Knights of America MC.</p>
+  </section>
+
+  <main>
+    <section class="card">
+      <h2>Get in Touch</h2>
+      <p>If you have any questions or are interested in getting to know us and the organization as a whole, please don’t hesitate to reach out via email:</p>
+      <p><a class="email-link" href="mailto:NKMCSWAMPFOX@gmail.com">NKMCSWAMPFOX@gmail.com</a></p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>© 2026 Nam Knights of America MC — Swamp Fox Chapter. All rights reserved.</div>
+    <div>www.nkmcswampfox.com</div>
+  </footer>
+</body>
+</html>
