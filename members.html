@@ -1719,16 +1719,7 @@
 
     document.getElementById('order-form').addEventListener('submit', function(e) {
       updateTotals();
-      document.querySelectorAll('.product-card').forEach(function(card) {
-  const qtyInput = card.querySelector('.qty-input');
-  const qty = Number(qtyInput?.value || 0);
-
-  if (qty === 0) {
-    card.querySelectorAll('[name]').forEach(function(field) {
-      field.removeAttribute('name');
-    });
-  }
-});
+      
       const cards = document.querySelectorAll('.product-card');
       for (const card of cards) {
         const qty = Number(card.querySelector('.qty-input').value || 0);
@@ -1742,6 +1733,15 @@
           if (radioBlock && !radioBlock.querySelector('input[type="radio"]:checked')) { e.preventDefault(); alert('Please select the required option for item #' + item + '.'); card.scrollIntoView({behavior:'smooth', block:'center'}); return; }
         }
       }
+ cards.forEach(function(card) {
+  const qty = Number(card.querySelector('.qty-input').value || 0);
+
+  if (qty === 0) {
+    card.querySelectorAll('[name]').forEach(function(field) {
+      field.removeAttribute('name');
+    });
+  }
+});     
     });
 
     updateTotals();
