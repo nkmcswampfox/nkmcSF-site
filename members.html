@@ -1719,6 +1719,16 @@
 
     document.getElementById('order-form').addEventListener('submit', function(e) {
       updateTotals();
+      document.querySelectorAll('.product-card').forEach(function(card) {
+  const qtyInput = card.querySelector('.qty-input');
+  const qty = Number(qtyInput?.value || 0);
+
+  if (qty === 0) {
+    card.querySelectorAll('[name]').forEach(function(field) {
+      field.removeAttribute('name');
+    });
+  }
+});
       const cards = document.querySelectorAll('.product-card');
       for (const card of cards) {
         const qty = Number(card.querySelector('.qty-input').value || 0);
