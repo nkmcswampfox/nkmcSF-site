@@ -1734,33 +1734,70 @@
       if (e.target.classList.contains('qty-input')) updateTotals();
     });
 
-    document.getElementById('order-form').addEventListener('submit', function(e) {
-      updateTotals();
-      
-      const cards = document.querySelectorAll('.product-card');
-      for (const card of cards) {
-        const qty = Number(card.querySelector('.qty-input').value || 0);
-        if (qty > 0) {
-          const item = card.dataset.item;
-          const sizeSelect = card.querySelector('.size-select');
-          const colorSelect = card.querySelector('.color-select');
-          if (sizeSelect && !sizeSelect.value) { e.preventDefault(); alert('Please select size for item #' + item + '.'); card.scrollIntoView({behavior:'smooth', block:'center'}); return; }
-          if (colorSelect && !colorSelect.value) { e.preventDefault(); alert('Please select color for item #' + item + '.'); card.scrollIntoView({behavior:'smooth', block:'center'}); return; }
-          const radioBlock = card.querySelector('.radio-block');
-          if (radioBlock && !radioBlock.querySelector('input[type="radio"]:checked')) { e.preventDefault(); alert('Please select the required option for item #' + item + '.'); card.scrollIntoView({behavior:'smooth', block:'center'}); return; }
-        }
+  document.getElementById('order-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  updateTotals();
+
+  const form = this;
+  const cards = document.querySelectorAll('.product-card');
+
+  for (const card of cards) {
+    const qty = Number(card.querySelector('.qty-input').value || 0);
+
+    if (qty > 0) {
+      const item = card.dataset.item;
+      const sizeSelect = card.querySelector('.size-select');
+      const colorSelect = card.querySelector('.color-select');
+      const radioBlock = card.querySelector('.radio-block');
+
+      if (sizeSelect && !sizeSelect.value) {
+        alert('Please select size for item #' + item + '.');
+        card.scrollIntoView({behavior:'smooth', block:'center'});
+        return;
       }
- cards.forEach(function(card) {
-  const qty = Number(card.querySelector('.qty-input').value || 0);
 
-  if (qty === 0) {
-    card.querySelectorAll('[name]').forEach(function(field) {
-      field.removeAttribute('name');
-    });
+      if (colorSelect && !colorSelect.value) {
+        alert('Please select color for item #' + item + '.');
+        card.scrollIntoView({behavior:'smooth', block:'center'});
+        return;
+      }
+
+      if (radioBlock && !radioBlock.querySelector('input[type="radio"]:checked')) {
+        alert('Please select the required option for item #' + item + '.');
+        card.scrollIntoView({behavior:'smooth', block:'center'});
+        return;
+      }
+    }
   }
-});     
-    });
 
+  cards.forEach(function(card) {
+    const qty = Number(card.querySelector('.qty-input').value || 0);
+
+    if (qty === 0) {
+      card.querySelectorAll('[name]').forEach(function(field) {
+        field.removeAttribute('name');
+      });
+    }
+  });
+
+  fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form),
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+  .then(function(response) {
+    if (response.ok) {
+      window.location.href = 'thank-you.html';
+    } else {
+      alert('There was a problem submitting your order. Please try again.');
+    }
+  })
+  .catch(function() {
+    alert('There was a problem submitting your order. Please try again.');
+  });
+});
     updateTotals();
   </script>
 </body>
